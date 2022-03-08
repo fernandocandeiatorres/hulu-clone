@@ -1,14 +1,20 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { ThumbUpIcon } from "@heroicons/react/outline";
 import { forwardRef } from "react";
+import ThumbnailCard from "../pages/thumbnailcard";
+import { useGlobalContext } from "./context";
+
 const Thumbnail = forwardRef(({ result }, ref) => {
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
 
+  const { openDetail, closeDetail } = useGlobalContext();
+
   return (
     <div
+      onClick={() => openDetail(result.id)}
       ref={ref}
-      className="group cursor-pointer p-2 transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50"
+      className={`group cursor-pointer p-2 transition duration-200 ease-in transform sm:hover:scale-105 hover:z-40`}
     >
       <Image
         layout="responsive"
